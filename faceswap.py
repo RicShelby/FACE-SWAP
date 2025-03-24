@@ -4,48 +4,16 @@ import numpy as np
 import dlib
 import base64
 import os
-import gdown
-import zipfile
 # from io import BytesIO
 # from PIL import Image
 
 app = Flask(__name__)
 
-file_id = "1OCgV_zEtd2BJK3YQ6Y-1-kPK1pyEFTHd"  
-zip_path = "model.zip"
-extract_folder = "models/"
-
-# Check if folder already exists
-if not os.path.exists(extract_folder):
-    print("Downloading model ZIP file...")
-    
-    # Download the ZIP file
-    url = f"https://drive.google.com/uc?id={file_id}"
-    gdown.download(url, zip_path, quiet=False)
-
-    # Extract the ZIP file
-    print("Extracting ZIP file...")
-    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-        zip_ref.extractall(extract_folder)
-
-    # Remove the ZIP file after extraction
-    os.remove(zip_path)
-
-    print("Model downloaded and extracted successfully!")
-
-# Path to the extracted model file
-model_file = os.path.join(extract_folder, "shape_predictor_68_face_landmarks.dat")
-
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor(model_file)
+predictor = dlib.shape_predictor("C:/MINI-FACESWAP/CLARK/FACESWAP/shape_predictor_68_face_landmarks.dat")
 
 UPLOAD_FOLDER = "static/uploads/"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
-# detector = dlib.get_frontal_face_detector()
-# predictor = dlib.shape_predictor("C:/MINI-FACESWAP/CLARK/FACESWAP/shape_predictor_68_face_landmarks.dat")
-# UPLOAD_FOLDER = "static/uploads/"
-# os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 ALIGN_POINTS = list(range(17, 68))
 
