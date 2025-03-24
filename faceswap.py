@@ -4,16 +4,34 @@ import numpy as np
 import dlib
 import base64
 import os
+import gdown
 # from io import BytesIO
 # from PIL import Image
 
 app = Flask(__name__)
 
+# Define the model file path
+MODEL_PATH = "shape_predictor_68_face_landmarks.dat"
+
+# Check if file exists, otherwise download
+if not os.path.exists(MODEL_PATH):
+    print("Downloading shape predictor model...")
+    file_id = "1aBcD3eFgHIJKlmNOPQRsTUVwxYZ"  # Replace with your Google Drive file ID
+    url = f"https://drive.google.com/uc?id={file_id}"
+    gdown.download(url, MODEL_PATH, quiet=False)
+
+# Load the model after downloading
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor("C:/MINI-FACESWAP/CLARK/FACESWAP/shape_predictor_68_face_landmarks.dat")
+predictor = dlib.shape_predictor(MODEL_PATH)
 
 UPLOAD_FOLDER = "static/uploads/"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# detector = dlib.get_frontal_face_detector()
+# predictor = dlib.shape_predictor("C:/MINI-FACESWAP/CLARK/FACESWAP/shape_predictor_68_face_landmarks.dat")
+
+# UPLOAD_FOLDER = "static/uploads/"
+# os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 ALIGN_POINTS = list(range(17, 68))
 
