@@ -5,31 +5,45 @@ import dlib
 import base64
 import os
 import gdown
+import zipfile
 # from io import BytesIO
 # from PIL import Image
 
 app = Flask(__name__)
 
-# Define the model file path
-MODEL_PATH = "shape_predictor_68_face_landmarks.dat"
+file_id = "1OCgV_zEtd2BJK3YQ6Y-1-kPK1pyEFTHd"  
+zip_path = "model.zip"
+extract_folder = "models/"
 
-# Check if file exists, otherwise download
-if not os.path.exists(MODEL_PATH):
-    print("Downloading shape predictor model...")
-    file_id = "1aBcD3eFgHIJKlmNOPQRsTUVwxYZ"  # Replace with your Google Drive file ID
+# Check if folder already exists
+if not os.path.exists(extract_folder):
+    print("Downloading model ZIP file...")
+    
+    # Download the ZIP file
     url = f"https://drive.google.com/uc?id={file_id}"
-    gdown.download(url, MODEL_PATH, quiet=False)
+    gdown.download(url, zip_path, quiet=False)
 
-# Load the model after downloading
+    # Extract the ZIP file
+    print("Extracting ZIP file...")
+    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        zip_ref.extractall(extract_folder)
+
+    # Remove the ZIP file after extraction
+    os.remove(zip_path)
+
+    print("Model downloaded and extracted successfully!")
+
+# Path to the extracted model file
+model_file = os.path.join(extract_folder, "shape_predictor_68_face_landmarks.dat")
+
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor(MODEL_PATH)
+predictor = dlib.shape_predictor(model_file)
 
 UPLOAD_FOLDER = "static/uploads/"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # detector = dlib.get_frontal_face_detector()
 # predictor = dlib.shape_predictor("C:/MINI-FACESWAP/CLARK/FACESWAP/shape_predictor_68_face_landmarks.dat")
-
 # UPLOAD_FOLDER = "static/uploads/"
 # os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
