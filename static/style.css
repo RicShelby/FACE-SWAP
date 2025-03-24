@@ -1,11 +1,33 @@
 /* General Styles */
 body {
+    /*
     font-family: 'Arial', sans-serif;
     text-align: center;
     background: linear-gradient(to right, #7a9ab8, #c9e0f8);
     color: #333;
     margin: 0;
     padding: 0;
+    */
+    background-image: url(background-image.webp);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    image-rendering: crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    color: white;
+    font-size: 40px;
+    text-shadow: 
+        -2px -2px 0 black,  
+         2px -2px 0 black,  
+        -2px  2px 0 black,  
+         2px  2px 0 black;
+         
+    margin: 0;
+    padding: 0;
+    letter-spacing: 2px;
+    word-spacing: 5px; 
 }
 
 /* Centering the Main Content */
@@ -22,7 +44,7 @@ body {
 video {
     width: 100%;
     max-width: 350px;
-    border: 3px solid #89c2d9; /* Pastel blue border */
+    border: 3px solid #89c2d9;
     border-radius: 12px;
     box-shadow: 0px 4px 10px rgba(137, 194, 217, 0.4);
 }
@@ -31,28 +53,39 @@ video {
 button {
     margin: 10px;
     padding: 12px 20px;
-    background: #8297ac; /* Pastel blue */
+    background: #F5F5DC;
     color: black;
     border: none;
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
+    font-family: 'Poppins';
     border-radius: 6px;
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background: #470b8b; /* Slightly darker pastel blue */
+    background: #8b4f0b;
     transform: scale(1.05);
 }
 
 /* Image Previews */
 .preview {
+    /* display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+    */
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
     margin-top: 20px;
+    font-size: 16px;
+    font-family: 'Poppins';
+    font-weight: bold;
+    text-shadow: none;
 }
 
 .preview img {
