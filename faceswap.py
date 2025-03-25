@@ -10,7 +10,7 @@ import os
 app = Flask(__name__)
 
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor("C:/MINI-FACESWAP/CLARK/FACESWAP/shape_predictor_68_face_landmarks.dat")
+predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 
 UPLOAD_FOLDER = "static/uploads/"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
