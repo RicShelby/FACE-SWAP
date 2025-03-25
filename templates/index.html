@@ -1,26 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Face Swap App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
     <h1>Face Swap Application</h1>
+
     <div class="container">
-        <video id="video" autoplay></video>
-        <canvas id="canvas" style="display: none;"></canvas>
+        <div class="video-container">
+            <video id="video" autoplay></video>
+            <canvas id="canvas" style="display: none;"></canvas>
+
+            <!-- Upload & Download Icons -->
+            <div class="icon-box">
+                <a id="UploadButton" href="javascript:void(0);" onclick="handleUpload()" class="icon-wrapper">
+                    <img src="{{ url_for('static', filename='upload_icon.png') }}" alt="Upload">
+                </a>
+                <a id="downloadButton" href="javascript:void(0);" onclick="handleDownload()" class="icon-wrapper">
+                    <img src="{{ url_for('static', filename='download_icon.png') }}" alt="Download">
+                </a>
+            </div>
+        </div>
+
         <button onclick="captureImage(1)">Capture Image 1</button>
         <button onclick="captureImage(2)">Capture Image 2</button>
-        <button onclick="swapFaces()">Swap Faces</button>
+        <button id="swap-button" onclick="swapFaces()">Swap Faces</button>
+
         <div class="preview">
             <img id="img1" src="" alt="Image 1">
             <img id="img2" src="" alt="Image 2">
         </div>
+
         <h2>Result:</h2>
-        <img id="swappedImage" src="" alt = "Swapped Face" style = "display: none;">
+        <img id="swappedImage" src="" alt="Swapped Face" style="display: none;">
     </div>
+
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
+
 </html>
